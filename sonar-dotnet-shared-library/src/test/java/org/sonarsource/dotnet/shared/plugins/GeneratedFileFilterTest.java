@@ -19,6 +19,12 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -28,14 +34,12 @@ import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GeneratedFileFilterTest {
   @Rule
@@ -114,7 +118,7 @@ public class GeneratedFileFilterTest {
     // Create temporary empty protobuf to satisfy a file.exists check, the content is ignored
     temp.newFile("file-metadata.pb");
 
-    when(configuration.protobufReportPath()).thenReturn(temp.getRoot().toPath());
+    when(configuration.protobufReportPath()).thenReturn(Optional.of(temp.getRoot().toPath()));
 
     return new GeneratedFileFilter(configuration, protobufImporterFactory);
   }

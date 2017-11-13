@@ -31,6 +31,7 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 @Properties({
   @Property(
+    multiValues = true,
     key = CSharpPlugin.FILE_SUFFIXES_KEY,
     defaultValue = CSharpPlugin.FILE_SUFFIXES_DEFVALUE,
     name = "File suffixes",
