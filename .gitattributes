@@ -1,0 +1,41 @@
+# Auto detect text files and perform LF normalization
+# http://davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
+* text=auto
+
+#
+# The above will handle all files NOT found below
+#
+
+#
+## Binary files should be left untouched
+#
+*.bmp       binary
+*.gif       binary
+*.jpg       binary
+*.png       binary
+*.class     binary
+*.dll       binary
+
+#
+## Visual Studio
+#
+*.sln       text eol=crlf merge=union
+*.csproj    text eol=crlf merge=union
+*.vbproj    text eol=crlf merge=union
+
+#
+## These files are text and should be normalized (Convert crlf => lf)
+#
+
+# source code
+*.cs        text diff=csharp
+*.resx      text merge=union
+*.java      text diff=java
+*.html      text diff=html
+*.props     text eol=crlf
+
+# scripts
+*.sh        text eol=lf
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+*.ps1       text eol=crlf
